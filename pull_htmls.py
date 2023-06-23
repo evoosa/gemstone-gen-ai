@@ -1,9 +1,11 @@
 import csv
+import os.path
 
 import requests
-from config import HTMLS_DIR, GEMSTONE_URLS_CSV
 
-with open(GEMSTONE_URLS_CSV, 'r') as file:
+from config import HTMLS_DIR, GEMSTONE_URLS_CSV_FILE, DATA_DIR
+
+with open(os.path.join(DATA_DIR, GEMSTONE_URLS_CSV_FILE), 'r') as file:
     reader = csv.reader(file)
     for row in reader:
         website_url = row[0]
