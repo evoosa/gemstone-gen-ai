@@ -3,7 +3,7 @@ import pickle
 
 import pandas as pd
 
-from config import OUTPUT_CSV_FILE, DATASET_CSV_FILE, DATA_DIR, GEMSTONE_METADATA_PICKLE_FILE
+from config import GEMSTONES_CSV_FILE, GEMSTONES_CLEAN_CSV, DATA_DIR, GEMSTONE_METADATA_PICKLE_FILE
 
 
 def get_full_gemstones_csv():
@@ -11,7 +11,7 @@ def get_full_gemstones_csv():
         unpickled_gemstone_data = pickle.load(gs_md_pickle_f)
 
     df = pd.DataFrame(unpickled_gemstone_data)
-    df.to_csv(os.path.join(DATA_DIR, OUTPUT_CSV_FILE), index=False)
+    df.to_csv(os.path.join(DATA_DIR, GEMSTONES_CSV_FILE), index=False)
 
 
 def create_dataset():
@@ -24,9 +24,9 @@ def create_dataset():
                "solubility",
                "mohs scale hardness",
                "luster"]
-    with open(os.path.join(DATA_DIR, OUTPUT_CSV_FILE), 'rb') as output_csv_f:
+    with open(os.path.join(DATA_DIR, GEMSTONES_CSV_FILE), 'rb') as output_csv_f:
         df = pd.read_csv(output_csv_f, usecols=columns)
-        df.to_csv(os.path.join(DATA_DIR, DATASET_CSV_FILE), index=False)
+        df.to_csv(os.path.join(DATA_DIR, GEMSTONES_CLEAN_CSV), index=False)
 
 
 if __name__ == '__main__':
