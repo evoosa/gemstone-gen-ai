@@ -3,7 +3,7 @@ import pickle
 
 from bs4 import BeautifulSoup
 
-from config import HTMLS_DIR, DATA_DIR, GEMSTONE_METADATA_PICKLE_FILE
+from config import HTMLS_DIR, DATA_DIR, GEMSTONE_DATA_PICKLE_FILE
 
 htmls = os.listdir(HTMLS_DIR)
 gemstones_data = []
@@ -28,5 +28,5 @@ for html_filename in htmls:
         print(gemstone_data)
         gemstones_data.append(gemstone_data)
 
-with open(os.path.join(DATA_DIR, GEMSTONE_METADATA_PICKLE_FILE), 'wb') as pickle_f:
+with open(os.path.join(DATA_DIR, GEMSTONE_DATA_PICKLE_FILE), 'wb') as pickle_f:
     pickle.dump(gemstones_data, pickle_f)
