@@ -5,7 +5,7 @@ import pickle
 import openai
 import pandas as pd
 
-from config import DATA_DIR, GEMSTONES_CLEAN_DATA_CSV, PROMPTS_PICKLE_FILE
+from config import DATA_DIR, GEMSTONES_CLEAN_DATA_CSV, PROMPTS_PICKLE_FILE, PROMPTS_CSV_FILE
 
 openai.organization = os.getenv("OPENAI_ORG")
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -65,3 +65,11 @@ print(prompts)
 print(prompts)
 with open(os.path.join(DATA_DIR, PROMPTS_PICKLE_FILE), 'wb') as pickle_f:
     pickle.dump(prompts, pickle_f)
+
+
+def output_prompts_to_csv():
+    with open(os.path.join(DATA_DIR, PROMPTS_PICKLE_FILE), 'rb') as pickle_f:
+        unpickled_prompts_data = pickle.load(pickle_f)
+        unpickled_prompts_data = list(filter(lambda x: x is not None, unpickled_prompts_data))
+        df = pd.DataFrame(unpickled_prompts_data)
+        df.to_csv(os.path.join(DATA_DIR, PROMPTS_CSV_FILE), index=False)
